@@ -24,12 +24,12 @@ export function SearchImages() {
     try {
       setIsLoading(true);
       const { data } = await axios.get(`${URL}${searchText}&page=${pageNum}}`);
-      setImages([...(images || []), ...data.results]);
       if (pageNum === 1) {
-        setPage(1);
+        setImages(data.results);
       } else {
-        setPage(page + 1);
+        setImages([...(images || []), ...data.results]);
       }
+      setPage(pageNum);
       setError(null);
     } catch (error) {
       console.log(error);
